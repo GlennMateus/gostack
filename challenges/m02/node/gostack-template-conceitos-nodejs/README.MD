@@ -1,8 +1,3 @@
-# .env helper
-module.exports={
-    PORT = xxxx
-}
-
 # Functional Requirements
 - [x] must ADD repositories
 - [x] must LIST repositories
