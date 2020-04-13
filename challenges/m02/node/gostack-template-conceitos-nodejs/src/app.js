@@ -5,10 +5,25 @@ const { uuid } = require("uuidv4");
 
 const app = express();
 
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 const repositories = [];
+
+// My middleware
+function logRequests(req, res, next) {
+  const { method, url } = req;
+  const { title, owner } = req.query;
+  const { id } = req.params;
+
+  const logLabel = `[${method.toUpperCase()}] ${url}`
+
+  console.time(logLabel);
+  next();
+  console.timeEnd(logLabel);
+}
+
+app.use(logRequests)
 
 app.get("/repositories", (request, response) => {
   return response.json(repositories);
